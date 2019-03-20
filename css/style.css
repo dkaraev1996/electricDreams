@@ -1,0 +1,54 @@
+/*style the computer text, input, and button*/
+body {
+  font-family: 'Lato', sans-serif;
+  font-size: 20px;
+  text-align: center;
+  background-image: url(../img/websiteBackground.svg);
+  background-size: cover;
+  animation: fadein 5s;
+}
+
+h1 {
+  font-family: 'Electrolize', sans-serif;
+  font-size: 40px;
+  text-align: center;
+  color: white;
+}
+
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+button {
+  display: none;
+}
+
+input{
+  font-size: 1em;
+  /* font-family: monospace; */
+}
+
+#human
+{
+  background-color: black;
+  color: rgb(63, 191, 127);
+  border: 0;
+  box-shadow: 1px 2px 3px;
+  width: 75%;
+  padding: 0.3em;
+  text-align: center;
+  box-shadow: .3em .4em .5em rgba(0,0,0,.5);
+}
+
+.green {color: rgb(74, 247, 31);}
+
+main{
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 50%;
+  margin: 1em auto;
+  padding: 1em 1em 2em 1em;
+  border-bottom: 2px solid rgb(0, 255, 144);
+  box-shadow: 1em 2em 3em rgba(0,0,0,.5);
+}

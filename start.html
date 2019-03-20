@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Electric Dreams</title>
+
+</head>
+
+<body>
+	<main>
+		<h1>Electric Dreams</h1>
+		<p id="computer" class="green">Hey there. How are you feeling today?</p>
+		<input id="human" type="text" placeholder="Type your response">
+		<button>Enter</button>
+		<button>Exit</button>
+
+	</main>
+
+	<script type="text/javascript">
+    const computer = document.querySelector('#computer')
+		const human = document.getElementById('human')
+		const button = document.getElementsByTagName('button')[0]
+		const main = document.querySelector('main')
+		let computerMsg = ""
+		let humanMsg = ""
+		let questionTrack = "start"
+		button.addEventListener('click', clickHandler)
+		function clickHandler(){
+			//do something
+			// computer.innerHTML = human.value
+			playGame()
+		}
+		window.addEventListener("keydown", keydownHandler)
+		function keydownHandler(event){
+			if (event.keyCode == 13 || event.keyCode == 10){
+				//do something
+				// computer.innerHTML = human.value
+				playGame();
+			}
+		}//end keydownHandler
+		let randomResponses = [
+			"Invalid answer. Try again.",
+			"That's not the right answer. Type your response again.",
+			"Wrong. Go type in a correct answer.",
+			"What? Please type in your answer once more."
+		]
+		function playGame() {
+			//analyze input
+			humanMsg = (human.value).toLowerCase()
+			if (questionTrack == "start"){
+				startEval()
+			} else if (questionTrack == "restart"){
+				restartEval()
+			} else if (questionTrack == "week"){
+				weekEval()
+			} else if (questionTrack == "badMood"){
+				badMoodEval()
+			} else if (questionTrack == "mondayResponse"){
+				mondayResponseEval()
+			} else if (questionTrack == "tuesdayResponse"){
+				tuesdayResponseEval()
+			} else if (questionTrack == "wednesdayResponse"){
+				wednesdayResponseEval()
+			} else if (questionTrack == "thursdayResponse"){
+				thursdayResponseEval()
+			} else if (questionTrack == "fridayResponse"){
+				fridayResponseEval()
+			} else if (questionTrack == "saturdayResponse"){
+				saturdayResponseEval()
+			} else if (questionTrack == "sundayResponse"){
+				sundayResponseEval()
+			} else {
+				genericResponse()
+			}
+			//update text on screen
+			computer.innerHTML = computerMsg
+			human.value = ""
+		}//end playGame
+		function restartEval(){
+			if (humanMsg.indexOf("restart") !== -1){
+				computerMsg = "Hey there. How are you feeling today?"
+				questionTrack = "start"
+			} else {
+				genericResponse()
+			}//end if
+		}//end restartEval
+		function startEval(){
+			if (humanMsg.indexOf("good") !== -1){
+				computerMsg = "Good to hear that! May I ask, what is your favorite day of the week?"
+				questionTrack = "week"
+			  main.classList.add("goodMoodTheme")
+			} else if (humanMsg.indexOf("bad") !== -1){
+				computerMsg = "That's too bad. In a scale from 1-5, type the number on how bad you feel?"
+				questionTrack = "badMood"
+			} else {
+				genericResponse()
+			}//end if
+		}//end startEval
+		function badMoodEval(){
+			if (humanMsg.indexOf("1") !== -1){
+				computerMsg = "That's not too bad. That is really mild, so I think you'll shrug it off. Thank you for your response. Type ''restart'' to start over."
+				questionTrack = "restart"
+			} else if (humanMsg.indexOf("2") !== -1){
+				computerMsg = "I'm sorry to hear that, but hopefully after quite some time, you will start to get back to a better mood. Thank you for your response. Type ''restart'' to start over."
+				questionTrack = "restart"
+			} else if (humanMsg.indexOf("3") !== -1){
+				computerMsg = "That's not good, I think you should need to really calm down and rest it off. Thank you for your response. Type ''restart'' to start over."
+				questionTrack = "restart"
+			} else if (humanMsg.indexOf("4") !== -1){
+				computerMsg = "Jeez... well, try to find an appropriate bad mood reliever to help with that, as well as to think positively. Thank you for your response. Type ''restart'' to start over."
+				questionTrack = "restart"
+			} else if (humanMsg.indexOf("5") !== -1){
+				computerMsg = "Yikes! Get yourself the maximum relief you need to getting back to a good mood. Thank you for your response. Type ''restart'' to start over."
+				questionTrack = "restart"
+			} else {
+				genericResponse()
+			}//end if
+		}//end badMoodEval
+		function weekEval(){
+			main.style.backgroundColor = humanMsg
+			if (humanMsg.indexOf("sunday") !== -1){
+				computerMsg = "Awesome! Sundays are a good time for me to relax from the weekend, how about you? (Yes/No)"
+				questionTrack = "sundayResponse"
+			} else if (humanMsg.indexOf("monday") !== -1){
+				computerMsg = "That's great! Even though I'm not fond on monday's myself, it's still good to enjoy a monday. Are mondays a busy day for you? (Yes/No)"
+				questionTrack = "mondayResponse"
+				 main.classList.add("mondayColorTheme")
+			} else if (humanMsg.indexOf("tuesday") !== -1 ){
+				computerMsg = "Good to know. I feel like tuesdays is just a typical, normal day for me. Is it for you? (Yes/No)"
+				questionTrack = "tuesdayResponse"
+			} else if (humanMsg.indexOf("wednesday") !== -1 ){
+				computerMsg = "Great! Wednesdays are just a typical mid-day week for me to experience. Is that the same for you? (Yes/No)"
+				questionTrack = "wednesdayResponse"
+			} else if (humanMsg.indexOf("thursday") !== -1 ){
+				computerMsg = "Cool. Thursdays is a day for me to anticipate for a weekend soon myself. How about you? (Yes/No)"
+				questionTrack = "thursdayResponse"
+			} else if (humanMsg.indexOf("friday") !== -1 ){
+				computerMsg = "Sweet! Fridays are the best day for me personally. What about you? (Yes/No)"
+				questionTrack = "fridayResponse"
+			} else if (humanMsg.indexOf("saturday") !== -1 ){
+				computerMsg = "That's nice. Saturdays is a restful day for me. Same for you? (Yes/No)"
+				questionTrack = "saturdayResponse"
+			} else {
+				genericResponse()
+			}//end if
+		}//end weekEval
+		function sundayResponseEval(){
+			if (humanMsg.indexOf("yes") !== -1){
+				computerMsg = "That's great! I knew so, thank you so much for your responses! Type ''restart'' to start over."
+				questionTrack = "restart"
+			} else if (humanMsg.indexOf("no") !== -1){
+				computerMsg = "Aw, I'm sorry. Other than that, thank you for your responses! Type ''restart'' to start over."
+				questionTrack = "restart"
+			} else {
+				genericResponse()
+			}//end if
+		}//end sundayResponseEval
+		function mondayResponseEval(){
+			if (humanMsg.indexOf("yes") !== -1){
+				computerMsg = "That's great! I knew so, thank you so much for your responses! Type ''restart'' to start over."
+				questionTrack = "restart"
+			} else if (humanMsg.indexOf("no") !== -1){
+				computerMsg = "Aw, I'm sorry. Other than that, thank you for your responses! Type ''restart'' to start over."
+				questionTrack = "restart"
+			} else {
+				genericResponse()
+			}//end if
+		}//end dogEval
+		function tuesdayResponseEval(){
+			if (humanMsg.indexOf("yes") !== -1){
+				computerMsg = "That's great! I knew so, thank you so much for your responses! Type ''restart'' to start over."
+				questionTrack = "restart"
+			} else if (humanMsg.indexOf("no") !== -1){
+				computerMsg = "Aw, I'm sorry. Other than that, thank you for your responses! Type ''restart'' to start over."
+				questionTrack = "restart"
+			} else {
+				genericResponse()
+			}//end if
+		}//end tuesdayResponseEval
+		function wednesdayResponseEval(){
+			if (humanMsg.indexOf("yes") !== -1){
+				computerMsg = "That's great! I knew so, thank you so much for your responses! Type ''restart'' to start over."
+				questionTrack = "restart"
+			} else if (humanMsg.indexOf("no") !== -1){
+				computerMsg = "Aw, I'm sorry. Other than that, thank you for your responses! Type ''restart'' to start over."
+				questionTrack = "restart"
+			} else {
+				genericResponse()
+			}//end if
+		}//end wednesdayResponseEval
+		function thursdayResponseEval(){
+			if (humanMsg.indexOf("yes") !== -1){
+				computerMsg = "That's great! I knew so, thank you so much for your responses! Type ''restart'' to start over."
+				questionTrack = "restart"
+			} else if (humanMsg.indexOf("no") !== -1){
+				computerMsg = "Aw, I'm sorry. Other than that, thank you for your responses! Type ''restart'' to start over."
+				questionTrack = "restart"
+			} else {
+				genericResponse()
+			}//end if
+		}//end thursdayResponseEval
+		function fridayResponseEval(){
+			if (humanMsg.indexOf("yes") !== -1){
+				computerMsg = "That's great! I knew so, thank you so much for your responses! Type ''restart'' to start over."
+				questionTrack = "restart"
+			} else if (humanMsg.indexOf("no") !== -1){
+				computerMsg = "Aw, I'm sorry. Other than that, thank you for your responses! Type ''restart'' to start over."
+				questionTrack = "restart"
+			} else {
+				genericResponse()
+			}//end if
+		}//end fridayResponseEval
+		function saturdayResponseEval(){
+			if (humanMsg.indexOf("yes") !== -1){
+				computerMsg = "That's great! I knew so, thank you so much for your responses! Type ''restart'' to start over."
+				questionTrack = "restart"
+			} else if (humanMsg.indexOf("no") !== -1){
+				computerMsg = "Aw, I'm sorry. Other than that, thank you for your responses! Type ''restart'' to start over."
+				questionTrack = "restart"
+			} else {
+				genericResponse()
+			}//end if
+		}//end saturdayResponseEval
+		function genericResponse(){
+			if (randomResponses.length > 0){
+				//show the random answer
+				const ranNum = Math.floor(Math.random()*randomResponses.length)
+				// console.log(ranNum);
+				computerMsg = randomResponses[ranNum]
+				randomResponses.splice(ranNum, 1)
+			} else {
+				computerMsg = "You have failed."
+				human.className = "displayNone"
+				setTimeout(endGame, 2000)
+			}
+		}//end genericResponse
+		function endGame(){
+			//go someplace else
+			location.assign("https://ak6.picdn.net/shutterstock/videos/30920176/thumb/9.jpg")
+		}//end endGame
+	</script>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</body>
+
+</html>
